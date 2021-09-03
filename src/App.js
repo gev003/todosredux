@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import React from "react";
+import Todoslist from "./components/todoslist";
+import TodosForm from "./components/todosForm";
+import ShowMoreBtn from "./components/showMoreBtn";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { TodosItemList } from "./components/todosItemList";
+import Loading from "./components/loading";
+import TodoFormBottom from "./components/todoFormBottom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router basename="/">
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <TodosForm />
+            <Todoslist />
+            <Loading />
+            <TodoFormBottom />
+            <ShowMoreBtn />
+          </Route>
+          <Route path="/:name" component={TodosItemList} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
